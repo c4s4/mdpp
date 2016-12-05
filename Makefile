@@ -23,7 +23,8 @@ test:
 	@echo "$(YELLOW)Running test$(CLEAR)"
 	mkdir -p $(BUILD_DIR)
 	go run $(NAME).go test.md > $(BUILD_DIR)/test.md
-
+	cat $(BUILD_DIR)/test.md
+	
 build:
 	@echo "$(YELLOW)Building executable$(CLEAR)"
 	mkdir -p $(BUILD_DIR)
