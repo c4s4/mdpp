@@ -5,9 +5,9 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"regexp"
 	"strings"
-	"path/filepath"
 )
 
 var directory = ""
@@ -20,16 +20,17 @@ func printError(err error, message string) {
 }
 
 func execute(cmd string) string {
-	command := exec.Command(cmd)
+	command := exec.Command("sh", "-c", cmd)
 	command.Dir = directory
 	output, err := command.CombinedOutput()
-	printError(err, "Error running command '"+cmd+"'")
-	return strings.TrimSpace(string(output))
+	result := strings.TrimSpace(string(output))
+	printError(err, "Error running command '"+cmd+"': "+result)
+	return result
 }
 
 func include(file string) string {
 	content, err := ioutil.ReadFile(filepath.Join(directory, file))
-	printError(err, "Error reading source file")
+	printError(err, "Error reading source file '"+file+"'")
 	return strings.TrimSpace(string(content))
 }
 
