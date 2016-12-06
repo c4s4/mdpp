@@ -7,6 +7,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"runtime"
 	"strings"
 )
 
@@ -20,7 +21,12 @@ func printError(err error, message string) {
 }
 
 func execute(cmd string) string {
-	command := exec.Command("sh", "-c", cmd)
+	var command *exec.Cmd
+	if runtime.GOOS == "windows" {
+		command = exec.Command("cmd.exe", "/C", cmd)
+	} else {
+		command = exec.Command("sh", "-c", cmd)
+	}
 	command.Dir = directory
 	output, err := command.CombinedOutput()
 	result := strings.TrimSpace(string(output))
