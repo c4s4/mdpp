@@ -14,7 +14,7 @@ var directory = ""
 
 func printError(err error, message string) {
 	if err != nil {
-		println(message + ": " + err.Error())
+		println(message)
 		os.Exit(2)
 	}
 }
@@ -23,13 +23,14 @@ func execute(cmd string) string {
 	command := exec.Command("sh", "-c", cmd)
 	command.Dir = directory
 	output, err := command.CombinedOutput()
-	printError(err, "Error running command '"+cmd+"'")
-	return strings.TrimSpace(string(output))
+	result := strings.TrimSpace(string(output))
+	printError(err, "Error running command '"+cmd+"': "+result)
+	return result
 }
 
 func include(file string) string {
 	content, err := ioutil.ReadFile(filepath.Join(directory, file))
-	printError(err, "Error reading source file")
+	printError(err, "Error reading source file '"+file+"'")
 	return strings.TrimSpace(string(content))
 }
 
