@@ -5,22 +5,22 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"regexp"
 	"strings"
-	"path/filepath"
 )
 
 var directory = ""
 
 func printError(err error, message string) {
 	if err != nil {
-		println(message)
+		println(message + ": " + err.Error())
 		os.Exit(2)
 	}
 }
 
 func execute(cmd string) string {
-	command := exec.Command(cmd)
+	command := exec.Command("sh", "-c", cmd)
 	command.Dir = directory
 	output, err := command.CombinedOutput()
 	printError(err, "Error running command '"+cmd+"'")

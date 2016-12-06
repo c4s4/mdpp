@@ -1,5 +1,12 @@
 # Semantic Change Log
 
+- version: 1.0.1
+  date:    2016-12-??
+  summary: Bug corrections
+  fixed:
+  - "Improved error printing."
+  - "Fixed command execution for Unix systems."
+
 - version: 1.0.0
   date:    2016-12-06
   summary: First release
