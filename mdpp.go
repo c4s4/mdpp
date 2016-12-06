@@ -7,7 +7,10 @@ import (
 	"os/exec"
 	"regexp"
 	"strings"
+	"path/filepath"
 )
+
+var directory = ""
 
 func printError(err error, message string) {
 	if err != nil {
@@ -18,13 +21,14 @@ func printError(err error, message string) {
 
 func execute(cmd string) string {
 	command := exec.Command(cmd)
+	command.Dir = directory
 	output, err := command.CombinedOutput()
 	printError(err, "Error running command '"+cmd+"'")
 	return strings.TrimSpace(string(output))
 }
 
 func include(file string) string {
-	content, err := ioutil.ReadFile(file)
+	content, err := ioutil.ReadFile(filepath.Join(directory, file))
 	printError(err, "Error reading source file")
 	return strings.TrimSpace(string(content))
 }
@@ -44,6 +48,8 @@ func command(s string) string {
 func process(file string) {
 	source, err := ioutil.ReadFile(file)
 	printError(err, "Error reading source file")
+	directory, err = filepath.Abs(filepath.Dir(file))
+	printError(err, "Error getting directory")
 	r := regexp.MustCompile("(?m)^(\\?|@)\\(.+\\)$")
 	processed := r.ReplaceAllStringFunc(string(source), command)
 	fmt.Println(processed)
