@@ -1,7 +1,6 @@
 NAME=mdpp
 VERSION=$(shell changelog release version)
 BUILD_DIR=build
-TEST_DIR=test
 
 YELLOW=\033[93m
 CYAN=\033[1m\033[96m
@@ -23,8 +22,9 @@ help:
 test:
 	@echo "$(YELLOW)Running test$(CLEAR)"
 	mkdir -p $(BUILD_DIR)
-	go run $(NAME).go $(TEST_DIR)/example.md > $(BUILD_DIR)/result.md
-
+	go run $(NAME).go test.md > $(BUILD_DIR)/test.md
+	cat $(BUILD_DIR)/test.md
+	
 build:
 	@echo "$(YELLOW)Building executable$(CLEAR)"
 	mkdir -p $(BUILD_DIR)

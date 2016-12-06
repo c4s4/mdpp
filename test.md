@@ -12,7 +12,7 @@ This will list files in test directory (thus this file *example.md*):
 This will include this file within itself:
 
 ```md
-@(example.md)
+@(test.md)
 ```
 
 *Enjoy!*

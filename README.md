@@ -9,7 +9,7 @@ MDPP (for Makdown Preprocessor) is a tool to process Markdown files to:
 Installation
 ------------
 
-Drop the binary for your platform in the *bin* directory of the archive somewhere in your `PATH`.
+Drop the binary for your platform in the *bin* directory of the archive somewhere in your `PATH` and rename it *mdpp*.
 
 Usage
 -----
