@@ -1,5 +1,11 @@
 # Semantic Change Log
 
+- version: 1.1.0
+  date:    2017-06-28
+  summary: Syntax changed for commands
+  changed:
+  - "Replaced ?(command) with $(command)."
+
 - version: 1.0.2
   date:    2016-12-07
   summary: Added Windows support for commands
