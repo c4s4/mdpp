@@ -45,7 +45,7 @@ func command(s string) string {
 	m := r.FindStringSubmatch(s)
 	cmd := m[1]
 	arg := m[2]
-	if cmd == "?" {
+	if cmd == "$" {
 		return execute(arg)
 	} else {
 		return include(arg)
@@ -57,7 +57,7 @@ func process(file string) {
 	printError(err, "Error reading source file")
 	directory, err = filepath.Abs(filepath.Dir(file))
 	printError(err, "Error getting directory")
-	r := regexp.MustCompile("(?m)^(\\?|@)\\(.+\\)$")
+	r := regexp.MustCompile("(?m)^(\\$|@)\\(.+\\)$")
 	processed := r.ReplaceAllStringFunc(string(source), command)
 	fmt.Println(processed)
 }

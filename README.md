@@ -3,7 +3,7 @@ Markdown Preprocessor
 
 MDPP (for Makdown Preprocessor) is a tool to process Markdown files to:
 
-- Replace `?(command)` with the result of the `command` running in the Markdown file directory.
+- Replace `$(command)` with the result of the `command` running in the Markdown file directory.
 - Replace `@(filename)` with the content of the *filename*. If *filename* is a relative path, it is relative to the directory of the Markdown file.
 
 Installation

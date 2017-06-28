@@ -1,3 +1,12 @@
 # NeON build file (http://github.com/c4s4/neon)
 
 extends: c4s4/build/go-tool.yml
+
+targets:
+
+  test:
+    doc: Run MDPP on sample markdown file
+    depends: build
+    steps:
+    - 'build/mdpp test.md'
+
